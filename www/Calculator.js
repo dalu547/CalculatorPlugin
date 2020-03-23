@@ -19,3 +19,9 @@ module.exports.substract = function (arg0, success, error) {
 module.exports.divide = function (arg0, success, error) {
     exec(success, error, 'Calculator', 'divide', [arg0]);
 };
+
+module.exports.flashOnOff = function (arg0, success, error) {
+    exec(success, error, 'Calculator', 'flashOnOff', [arg0]);
+};
+
+

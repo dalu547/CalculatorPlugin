@@ -96,6 +96,7 @@ public class Calculator extends CordovaPlugin
             callbackContext.error("Expected one non-empty string argument.");
         }
     }
+
     private void divide(JSONArray args, CallbackContext callbackContext) 
     {
         if (args != null) 
@@ -110,6 +111,29 @@ public class Calculator extends CordovaPlugin
                  callbackContext.error("Invalid divide operation");
             }
            
+        } else 
+        {
+            callbackContext.error("Expected one non-empty string argument.");
+        }
+    }
+
+    private void flashOnOff(JSONArray args, CallbackContext callbackContext) 
+    {
+        if (args != null) 
+        {
+           try 
+           {
+                int p1 =  Integer.parseInt(args.getJSONObject(0).getString("param1"));
+                int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
+                // callbackContext.success(""+ (p1/p2));
+
+                CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+                String cameraId = cameraManager.getCameraIdList()[0];
+                cameraManager.setTorchMode(cameraId, true);
+           } catch (CameraAccessException e) {
+            e.printStackTrace();
+            }
+       
         } else 
         {
             callbackContext.error("Expected one non-empty string argument.");
