@@ -1,0 +1,27 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "This is calculator plugin for tutorial purpose, created by : Jayesh Lahare",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlahare/CalculatorPlugin.git"
+  },
+  "keywords": [
+    "Jayesh",
+    "Ionic",
+    "Calculator",
+    "cordova",
+    "plugin"
+  ],
+  "author": "Jayesh Lahare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlahare/CalculatorPlugin/issues"
+  },
+  "homepage": "https://github.com/jlahare/CalculatorPlugin#readme",
+  "dependencies": {}
+}
