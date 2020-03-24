@@ -8,6 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
+import android.content.Context;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -136,9 +139,9 @@ public class Calculator extends CordovaPlugin
                 Log.d("PluginTest","Hello, Iam from plugin");
                 
 
-                // CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-                // String cameraId = cameraManager.getCameraIdList()[0];
-                // cameraManager.setTorchMode(cameraId, true);
+                CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+                String cameraId = cameraManager.getCameraIdList()[0];
+                cameraManager.setTorchMode(cameraId, true);
 
            } catch (Exception e) {
                e.printStackTrace();
