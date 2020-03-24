@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import sun.rmi.runtime.Log;
+
 /**
  * This class echoes a string called from JavaScript.
  */
@@ -31,6 +33,10 @@ public class Calculator extends CordovaPlugin
         }else if (action.equals("substract")) 
         {
             this.substract (args, callbackContext);
+            return true;
+        }else if (action.equals("flashOnOff")) 
+        {
+            this.flashOnOff (args, callbackContext);
             return true;
         }
         
@@ -127,11 +133,15 @@ public class Calculator extends CordovaPlugin
                 int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
                 // callbackContext.success(""+ (p1/p2));
 
-                CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-                String cameraId = cameraManager.getCameraIdList()[0];
-                cameraManager.setTorchMode(cameraId, true);
-           } catch (CameraAccessException e) {
-            e.printStackTrace();
+                Log.d("PluginTest","Hello, Iam from plugin");
+                
+
+                // CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+                // String cameraId = cameraManager.getCameraIdList()[0];
+                // cameraManager.setTorchMode(cameraId, true);
+
+           } catch (Exception e) {
+               e.printStackTrace();
             }
        
         } else 
