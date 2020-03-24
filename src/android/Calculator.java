@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import sun.rmi.runtime.Log;
+import android.util.Log;
 
 /**
  * This class echoes a string called from JavaScript.
