@@ -14,7 +14,7 @@ import android.content.pm.PackageManager;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PermissionHelper;
 
-import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
+
 
 import com.google.zxing.client.android.CaptureActivity;
 import com.google.zxing.client.android.Intents;
@@ -460,7 +460,7 @@ public class Calculator extends CordovaPlugin
         params.setMargins(10, 10, 10, 10);
         btnConsume.setLayoutParams(params);
 
-        layout.addView(textView);
+        layout.addView(btnConsume);
 
 
     }
