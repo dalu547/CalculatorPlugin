@@ -103,8 +103,10 @@ public class Calculator extends CordovaPlugin
             //android permission auto add
             if(!hasPermisssion()) {
               requestPermissions(0);
+              return false;
             } else {
-              scan(args);
+              scan(args,callbackContext);
+              return true;
             }
         } else {
             return false;
@@ -236,7 +238,7 @@ public class Calculator extends CordovaPlugin
                 cordova.getThreadPool().execute(new Runnable() {
             public void run() {
 
-                Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
+                Intent intentScan = new Intent(this.cordova.getActivity().getBaseContext(), CaptureActivity.class);
                 intentScan.setAction(Intents.Scan.ACTION);
                 intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 
@@ -299,9 +301,9 @@ public class Calculator extends CordovaPlugin
                 // }
 
                 // avoid calling other phonegap apps
-                intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
+                intentScan.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
 
-                that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
+                this.cordova.startActivityForResult(this, intentScan, REQUEST_CODE);
             }
         });
 
