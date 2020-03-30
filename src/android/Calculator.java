@@ -450,17 +450,27 @@ public class Calculator extends CordovaPlugin
 
     
         FrameLayout layout = (FrameLayout) webView.getView().getParent();
-
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
+        FrameLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10, 10, 10, 10);
         
         Button btnConsume = new Button(layout.getContext());
-      
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-        FrameLayout.LayoutParams.WRAP_CONTENT);
-
-        params.setMargins(10, 10, 10, 10);
         btnConsume.setLayoutParams(params);
-
+        btnConsume.setText("Consume");
+        btnConsume.setTextColor(Color.WHITE);
         layout.addView(btnConsume);
+
+        Button btnSkip = new Button(layout.getContext());
+        btnSkip.setLayoutParams(params);
+        btnSkip.setText("Skip");
+        btnSkip.setTextColor(Color.WHITE);
+        layout.addView(btnSkip);
+
+        Button btnDelay = new Button(layout.getContext());
+        btnDelay.setLayoutParams(params);
+        btnDelay.setText("Delay");
+        btnDelay.setTextColor(Color.WHITE);
+        layout.addView(btnDelay);
 
 
     }
