@@ -25,6 +25,7 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaInterface;
 import android.provider.Settings;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -232,13 +233,14 @@ public class Calculator extends CordovaPlugin
 
     private void scan(JSONArray args, CallbackContext callbackContext) 
     {
+           final CordovaPlugin that = this;
            try 
            {
               
                 cordova.getThreadPool().execute(new Runnable() {
             public void run() {
 
-                Intent intentScan = new Intent(this.cordova.getActivity().getBaseContext(), CaptureActivity.class);
+                Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
                 intentScan.setAction(Intents.Scan.ACTION);
                 intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 
@@ -301,9 +303,9 @@ public class Calculator extends CordovaPlugin
                 // }
 
                 // avoid calling other phonegap apps
-                intentScan.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
+                intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
 
-                this.cordova.startActivityForResult(this, intentScan, REQUEST_CODE);
+                that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
             }
         });
 
