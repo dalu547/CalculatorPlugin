@@ -34,6 +34,9 @@ import android.util.Log;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import android.content.Intent;
+import android.content.Context;
+import android.widget.Toast;
 
 
 /**
@@ -65,7 +68,7 @@ public class Calculator extends CordovaPlugin
     private static final String PHONE_TYPE = "PHONE_TYPE";
     private static final String SMS_TYPE = "SMS_TYPE";
 
-    private static final String LOG_TAG = "Calculator";
+    private static final String LOG_TAG = "ScannerPlugin";
     private CallbackContext callbackContext;
 
     private String [] permissions = { Manifest.permission.CAMERA };
@@ -79,6 +82,7 @@ public class Calculator extends CordovaPlugin
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException 
     {
         this.callbackContext = callbackContext;
+        showToast("execute");
         if (action.equals("add")) 
         {
             this.add(args, callbackContext);
@@ -100,7 +104,7 @@ public class Calculator extends CordovaPlugin
             this.flashOnOff (args, callbackContext);
             return true;
         }else if (action.equals(SCAN)) {
-
+            showToast("scan action in exxcute");
             //android permission auto add
             if(!hasPermisssion()) {
               requestPermissions(0);
@@ -109,7 +113,7 @@ public class Calculator extends CordovaPlugin
               scan(args,callbackContext);
               return true;
             }
-            
+
         } else {
             return false;
         }
@@ -231,7 +235,7 @@ public class Calculator extends CordovaPlugin
     }
 
     private void scan(JSONArray args, CallbackContext callbackContext) 
-    {
+    {      showToast("scan start");
            final CordovaPlugin that = this;
            try 
            {
@@ -312,6 +316,7 @@ public class Calculator extends CordovaPlugin
             } catch (Exception e) 
             {
                  callbackContext.error("scan failed");
+                 showToast("scan exception");
             }
                 
     }
@@ -329,6 +334,7 @@ public class Calculator extends CordovaPlugin
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        showToast("onActivityResult");
         if (requestCode == REQUEST_CODE && this.callbackContext != null) {
             if (resultCode == Activity.RESULT_OK) {
                 String text = "";
@@ -339,7 +345,7 @@ public class Calculator extends CordovaPlugin
                     obj.put(FORMAT, intent.getStringExtra("SCAN_RESULT_FORMAT"));
                     obj.put(CANCELLED, false);
                 } catch (JSONException e) {
-                    Log.d(LOG_TAG, "This should never happen");
+                    showToast("onActivityResult:"+e.getLocalizedMessage);
                 }
                 //this.success(new PluginResult(PluginResult.Status.OK, obj), this.callback);
                 this.callbackContext.success("sucess code is:"+text);
@@ -358,9 +364,27 @@ public class Calculator extends CordovaPlugin
             } else {
                 //this.error(new PluginResult(PluginResult.Status.ERROR), this.callback);
                 this.callbackContext.error("Unexpected error");
+                showToast("onActivityResult: Unexpected error");
+
             }
         }
     }
+
+    public void showToast(String toLog){
+        Context context = cordova.getActivity();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, toLog, duration);
+        toast.show();
+
+        showLog(toLog);
+    }
+
+    public void showLog(String logMessage){
+        
+        Log.d(LOG_TAG, logMessage);
+    }
+
 
     
 }
