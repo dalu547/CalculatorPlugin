@@ -1,8 +1,6 @@
 package cordova.plugin.calculator;
 
 
-
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +13,8 @@ import android.content.pm.PackageManager;
 
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PermissionHelper;
+
+import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import com.google.zxing.client.android.CaptureActivity;
 import com.google.zxing.client.android.Intents;
@@ -37,6 +37,16 @@ import android.hardware.camera2.CameraManager;
 import android.content.Intent;
 import android.content.Context;
 import android.widget.Toast;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.FrameLayout;
 
 
 /**
@@ -75,6 +85,8 @@ public class Calculator extends CordovaPlugin
 
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+
+        addView();
         
     }
 
@@ -383,6 +395,74 @@ public class Calculator extends CordovaPlugin
     public void showLog(String logMessage){
         
         Log.d(LOG_TAG, logMessage);
+    }
+
+    // public void addUI(){
+
+    //     LinearLayout ll = new LinearLayout(this);
+    //     ll.setOrientation(LinearLayout.HORIZONTAL);
+        
+    //     // Configuring the width and height of the linear layout.
+    //     LayoutParams llLP = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+    //             LayoutParams.WRAP_CONTENT);
+    //     ll.setLayoutParams(llLP);
+
+    //     Button btnConsume = new Button(this);
+    //     LayoutParams lp = new LayoutParams(
+    //             LayoutParams.WRAP_CONTENT,
+    //             LinearLayout.LayoutParams.WRAP_CONTENT);
+
+    //     btnConsume.setLayoutParams(lp);
+
+    //     btnConsume.setText("consume");
+
+    //     btnConsume.setPadding(8, 8, 8, 8);
+    //     ll.addView(btnConsume);
+
+    //     Button btnDelay = new Button(this);
+
+    //     btnDelay.setLayoutParams(lp);
+
+    //     btnDelay.setText("delay");
+
+    //     btnDelay.setPadding(8, 8, 8, 8);
+    //     ll.addView(btnDelay);
+
+    //     Button btnSkip = new Button(this);
+
+    //     btnSkip.setLayoutParams(lp);
+
+    //     btnSkip.setText("skip");
+
+    //     btnSkip.setPadding(8, 8, 8, 8);
+    //     ll.addView(btnSkip);
+
+
+    //     //Now finally attach the Linear layout to the current Activity.
+    //     setContentView(ll);
+
+    //     this.cordova.getActivity().getWindow().addContentView(ll, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+    //     ViewGroup.LayoutParams.WRAP_CONTENT));
+
+    // }
+       
+    public void addView(){
+
+    
+        FrameLayout layout = (FrameLayout) webView.getView().getParent();
+
+        
+        Button btnConsume = new Button(layout.getContext());
+      
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+        FrameLayout.LayoutParams.WRAP_CONTENT);
+
+        params.setMargins(10, 10, 10, 10);
+        btnConsume.setLayoutParams(params);
+
+        layout.addView(textView);
+
+
     }
 
 
