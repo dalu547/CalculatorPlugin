@@ -345,7 +345,7 @@ public class Calculator extends CordovaPlugin
                     obj.put(FORMAT, intent.getStringExtra("SCAN_RESULT_FORMAT"));
                     obj.put(CANCELLED, false);
                 } catch (JSONException e) {
-                    showToast("onActivityResult:"+e.getLocalizedMessage);
+                    showToast("onActivityResult exception:");
                 }
                 //this.success(new PluginResult(PluginResult.Status.OK, obj), this.callback);
                 this.callbackContext.success("sucess code is:"+text);
