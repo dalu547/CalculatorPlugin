@@ -27,9 +27,10 @@
         </config-file>
     
     <framework src="src/android/barcodescanner.gradle" custom="true" type="gradleReference"/>
-    <framework src="com.android.support:support-v4:$ANDROID_SUPPORT_V4_VERSION"/>
+    
+    <framework src="com.android.support:support-v4:23.+" />
         
-    <preference name="ANDROID_SUPPORT_V4_VERSION" default="27.+"/>
+    
     <lib-file src="src/android/barcodescanner-release-2.1.5.aar"/>
     
         <config-file parent="/*" target="AndroidManifest.xml" />
