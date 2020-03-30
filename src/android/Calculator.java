@@ -109,12 +109,11 @@ public class Calculator extends CordovaPlugin
               scan(args,callbackContext);
               return true;
             }
+            
         } else {
             return false;
         }
 
-        
-        return false;
     }
 
     
