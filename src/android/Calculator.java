@@ -47,7 +47,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.FrameLayout;
-
+import android.graphics.Color;
 
 /**
  * This class echoes a string called from JavaScript.
