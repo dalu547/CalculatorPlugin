@@ -86,7 +86,7 @@ public class Calculator extends CordovaPlugin
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
-        addView();
+        // addView();
         
     }
 
@@ -251,77 +251,18 @@ public class Calculator extends CordovaPlugin
            final CordovaPlugin that = this;
            try 
            {
-              
                 cordova.getThreadPool().execute(new Runnable() {
-            public void run() {
+                public void run() 
+                {
+                    Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
+                    intentScan.setAction(Intents.Scan.ACTION);
+                    intentScan.addCategory(Intent.CATEGORY_DEFAULT);
+                    // avoid calling other phonegap apps
+                    intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
+                    that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
 
-                Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
-                intentScan.setAction(Intents.Scan.ACTION);
-                intentScan.addCategory(Intent.CATEGORY_DEFAULT);
-
-                // add config as intent extras
-                // if (args.length() > 0) {
-
-                    // JSONObject obj;
-                    // JSONArray names;
-                    // String key;
-                    // Object value;
-
-                    // for (int i = 0; i < args.length(); i++) {
-
-                        // try {
-                        //     obj = args.getJSONObject(i);
-                        // } catch (JSONException e) {
-                        //     Log.i("CordovaLog", e.getLocalizedMessage());
-                        //     continue;
-                        // }
-
-                        // names = obj.names();
-                        // for (int j = 0; j < names.length(); j++) {
-                        //     try {
-                        //         key = names.getString(j);
-                        //         value = obj.get(key);
-
-                        //         if (value instanceof Integer) {
-                        //             intentScan.putExtra(key, (Integer) value);
-                        //         } else if (value instanceof String) {
-                        //             intentScan.putExtra(key, (String) value);
-                        //         }
-
-                        //     } catch (JSONException e) {
-                        //         Log.i("CordovaLog", e.getLocalizedMessage());
-                        //     }
-                        // }
-
-                        // intentScan.putExtra(Intents.Scan.CAMERA_ID, obj.optBoolean(PREFER_FRONTCAMERA, false) ? 1 : 0);
-                        // intentScan.putExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, obj.optBoolean(SHOW_FLIP_CAMERA_BUTTON, false));
-                        // intentScan.putExtra(Intents.Scan.SHOW_TORCH_BUTTON, obj.optBoolean(SHOW_TORCH_BUTTON, false));
-                        // intentScan.putExtra(Intents.Scan.TORCH_ON, obj.optBoolean(TORCH_ON, false));
-                        // intentScan.putExtra(Intents.Scan.SAVE_HISTORY, obj.optBoolean(SAVE_HISTORY, false));
-
-                        // boolean beep = obj.optBoolean(DISABLE_BEEP, false);
-                        // intentScan.putExtra(Intents.Scan.BEEP_ON_SCAN, !beep);
-                        // if (obj.has(RESULTDISPLAY_DURATION)) {
-                        //     intentScan.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, "" + obj.optLong(RESULTDISPLAY_DURATION));
-                        // }
-                        // if (obj.has(FORMATS)) {
-                        //     intentScan.putExtra(Intents.Scan.FORMATS, obj.optString(FORMATS));
-                        // }
-                        // if (obj.has(PROMPT)) {
-                        //     intentScan.putExtra(Intents.Scan.PROMPT_MESSAGE, obj.optString(PROMPT));
-                        // }
-                        // if (obj.has(ORIENTATION)) {
-                        //     intentScan.putExtra(Intents.Scan.ORIENTATION_LOCK, obj.optString(ORIENTATION));
-                        // }
-                    // }
-
-                // }
-
-                // avoid calling other phonegap apps
-                intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
-
-                that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
-            }
+                    addView();
+                }
         });
 
             //  callbackContext.success();
@@ -465,16 +406,11 @@ public class Calculator extends CordovaPlugin
         btnSkip.setText("Skip");
         btnSkip.setTextColor(Color.WHITE);
         layout.addView(btnSkip);
-
+        
         Button btnDelay = new Button(layout.getContext());
         btnDelay.setLayoutParams(params);
         btnDelay.setText("Delay");
         btnDelay.setTextColor(Color.WHITE);
         layout.addView(btnDelay);
-
-
     }
-
-
-    
 }
