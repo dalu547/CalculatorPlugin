@@ -261,10 +261,10 @@ public class Calculator extends CordovaPlugin
                     intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
                     that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
 
-                    addView();
                 }
-        });
-
+            });
+            
+            addView();
             //  callbackContext.success();
             } catch (Exception e) 
             {
