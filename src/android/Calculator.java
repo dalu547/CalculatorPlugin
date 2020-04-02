@@ -52,7 +52,7 @@ import android.graphics.Color;
 /**
  * This class echoes a string called from JavaScript.
  */
-public class Calculator extends CordovaPlugin 
+public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.BarcodeReaderListener
 {
     public static final int REQUEST_CODE = 0x0ba7c;
 
@@ -254,17 +254,24 @@ public class Calculator extends CordovaPlugin
                 cordova.getThreadPool().execute(new Runnable() {
                 public void run() 
                 {
-                    Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
-                    intentScan.setAction(Intents.Scan.ACTION);
-                    intentScan.addCategory(Intent.CATEGORY_DEFAULT);
-                    // avoid calling other phonegap apps
-                    intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
-                    that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
+                    // Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
+                    // intentScan.setAction(Intents.Scan.ACTION);
+                    // intentScan.addCategory(Intent.CATEGORY_DEFAULT);
+                    // // avoid calling other phonegap apps
+                    // intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
+                    // that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
+
+                    // Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+                    // intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+                    // that.cordova.startActivityForResult(intent, REQUEST_CODE); 
+
+                    addBarcodeReaderFragment();
+                    
 
                 }
             });
             
-            addView();
+            // addView();
             //  callbackContext.success();
             } catch (Exception e) 
             {
@@ -412,5 +419,50 @@ public class Calculator extends CordovaPlugin
         btnDelay.setText("Delay");
         btnDelay.setTextColor(Color.WHITE);
         layout.addView(btnDelay);
+    }
+
+    private void addBarcodeReaderFragment() {
+        BarcodeReaderFragment readerFragment = BarcodeReaderFragment.newInstance(true, false, View.VISIBLE);
+        readerFragment.setListener(this);
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fm_container, readerFragment);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onScanned(Barcode barcode) {
+//        Toast.makeText(this, barcode.rawValue, Toast.LENGTH_SHORT).show();
+        mTvResultHeader.setText("Barcode values");
+        mTvResult.setText(barcode.rawValue);
+    }
+
+    @Override
+    public void onScannedMultiple(List<Barcode> barcodes) {
+
+        Log.d("SCANNER", "onScannedMultiple: " + barcodes.size());
+
+        String codes = "";
+        for (Barcode barcode : barcodes) {
+            codes += barcode.displayValue + ", ";
+        }
+
+        final String finalCodes = codes;
+//        Toast.makeText(MainActivity.this, "Barcodes: " + finalCodes, Toast.LENGTH_SHORT).show();
+
+//        Toast.makeText(this, finalCodes, Toast.LENGTH_SHORT).show();
+        mTvResultHeader.setText("Barcode value from fragment");
+        mTvResult.setText(finalCodes);
+
+    }
+
+    @Override
+    public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
+
+    }
+
+    @Override
+    public void onScanError(String errorMessage) {
+
     }
 }
