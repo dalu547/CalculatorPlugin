@@ -440,7 +440,7 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
         final CordovaPlugin that = this;
         BarcodeReaderFragment readerFragment = BarcodeReaderFragment.newInstance(true, false, View.VISIBLE);
         readerFragment.setListener(this);
-        FragmentManager supportFragmentManager = that.cordova.getActivity().getSupportFragmentManager();
+        FragmentManager supportFragmentManager = cordova.getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fm_container, readerFragment);
         fragmentTransaction.commitAllowingStateLoss();
@@ -455,17 +455,19 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
 
     @Override
     public void onScannedMultiple(List<Barcode> barcodes) {
-
+        
         Log.d("SCANNER", "onScannedMultiple: " + barcodes.size());
-
+        
         String codes = "";
         for (Barcode barcode : barcodes) {
             codes += barcode.displayValue + ", ";
         }
-
+        
         final String finalCodes = codes;
-
-       Toast.makeText(this, finalCodes, Toast.LENGTH_SHORT).show();
+        
+        showToast(finalCodes);
+        
+    //    Toast.makeText(this, finalCodes, Toast.LENGTH_SHORT).show();
         // mTvResultHeader.setText("Barcode value from fragment");
         // mTvResult.setText(finalCodes);
 
@@ -479,5 +481,11 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
     @Override
     public void onScanError(String errorMessage) {
 
+    }
+
+    @Override
+    public void onCameraPermissionDenied() {
+     showToast("Camera permission denied!");
+        
     }
 }
