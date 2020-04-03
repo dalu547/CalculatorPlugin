@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -67,7 +70,7 @@ import android.graphics.Color;
 /**
  * This class echoes a string called from JavaScript.
  */
-public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.BarcodeReaderListener
+public class Calculator extends CordovaPlugin
 {
     public static final int REQUEST_CODE = 0x0ba7c;
 
@@ -269,20 +272,20 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
                 cordova.getThreadPool().execute(new Runnable() {
                 public void run() 
                 {
-                    // Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
+
+
+                    Intent intent = new Intent(this.cordova.getActivity(), MainActivity.class);
+                    this.cordova.getActivity().startActivity(intent);
+
+                    // // Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
                     // intentScan.setAction(Intents.Scan.ACTION);
                     // intentScan.addCategory(Intent.CATEGORY_DEFAULT);
                     // // avoid calling other phonegap apps
                     // intentScan.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
-                    // that.cordova.startActivityForResult(that, intentScan, REQUEST_CODE);
+                    // that.cordova.startActivity(that, intentScan);
 
-                    // Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-                    // intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-                    // that.cordova.startActivityForResult(intent, REQUEST_CODE); 
-
-                    addBarcodeReaderFragment();
+                    // addBarcodeReaderFragment();
                     
-
                 }
             });
             
@@ -360,132 +363,8 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
         Log.d(LOG_TAG, logMessage);
     }
 
-    // public void addUI(){
-
-    //     LinearLayout ll = new LinearLayout(this);
-    //     ll.setOrientation(LinearLayout.HORIZONTAL);
-        
-    //     // Configuring the width and height of the linear layout.
-    //     LayoutParams llLP = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-    //             LayoutParams.WRAP_CONTENT);
-    //     ll.setLayoutParams(llLP);
-
-    //     Button btnConsume = new Button(this);
-    //     LayoutParams lp = new LayoutParams(
-    //             LayoutParams.WRAP_CONTENT,
-    //             LinearLayout.LayoutParams.WRAP_CONTENT);
-
-    //     btnConsume.setLayoutParams(lp);
-
-    //     btnConsume.setText("consume");
-
-    //     btnConsume.setPadding(8, 8, 8, 8);
-    //     ll.addView(btnConsume);
-
-    //     Button btnDelay = new Button(this);
-
-    //     btnDelay.setLayoutParams(lp);
-
-    //     btnDelay.setText("delay");
-
-    //     btnDelay.setPadding(8, 8, 8, 8);
-    //     ll.addView(btnDelay);
-
-    //     Button btnSkip = new Button(this);
-
-    //     btnSkip.setLayoutParams(lp);
-
-    //     btnSkip.setText("skip");
-
-    //     btnSkip.setPadding(8, 8, 8, 8);
-    //     ll.addView(btnSkip);
+  
 
 
-    //     //Now finally attach the Linear layout to the current Activity.
-    //     setContentView(ll);
-
-    //     this.cordova.getActivity().getWindow().addContentView(ll, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-    //     ViewGroup.LayoutParams.WRAP_CONTENT));
-
-    // }
-       
-    public void addView(){
-
-    
-        FrameLayout layout = (FrameLayout) webView.getView().getParent();
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
-        FrameLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(10, 10, 10, 10);
-        
-        Button btnConsume = new Button(layout.getContext());
-        btnConsume.setLayoutParams(params);
-        btnConsume.setText("Consume");
-        btnConsume.setTextColor(Color.WHITE);
-        layout.addView(btnConsume);
-
-        Button btnSkip = new Button(layout.getContext());
-        btnSkip.setLayoutParams(params);
-        btnSkip.setText("Skip");
-        btnSkip.setTextColor(Color.WHITE);
-        layout.addView(btnSkip);
-        
-        Button btnDelay = new Button(layout.getContext());
-        btnDelay.setLayoutParams(params);
-        btnDelay.setText("Delay");
-        btnDelay.setTextColor(Color.WHITE);
-        layout.addView(btnDelay);
-    }
-
-    private void addBarcodeReaderFragment() {
-        
-        BarcodeReaderFragment readerFragment = BarcodeReaderFragment.newInstance(true, false, View.VISIBLE);
-        readerFragment.setListener(this);
-        FragmentManager supportFragmentManager = this.cordova.getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fm_container, readerFragment);
-        fragmentTransaction.commitAllowingStateLoss();
-    }
-
-    @Override
-    public void onScanned(Barcode barcode) {
-//        Toast.makeText(this, barcode.rawValue, Toast.LENGTH_SHORT).show();
-        // mTvResultHeader.setText("Barcode values");
-        // mTvResult.setText(barcode.rawValue);
-    }
-
-    @Override
-    public void onScannedMultiple(List<Barcode> barcodes) {
-        
-        Log.d("SCANNER", "onScannedMultiple: " + barcodes.size());
-        
-        String codes = "";
-        for (Barcode barcode : barcodes) {
-            codes += barcode.displayValue + ", ";
-        }
-        
-        final String finalCodes = codes;
-        
-        showToast(finalCodes);
-        
-    //    Toast.makeText(this, finalCodes, Toast.LENGTH_SHORT).show();
-        // mTvResultHeader.setText("Barcode value from fragment");
-        // mTvResult.setText(finalCodes);
-
-    }
-
-    @Override
-    public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
-
-    }
-
-    @Override
-    public void onScanError(String errorMessage) {
-
-    }
-
-    @Override
-    public void onCameraPermissionDenied() {
-     showToast("Camera permission denied!");
-        
-    }
+   
 }
