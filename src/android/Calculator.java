@@ -1,6 +1,6 @@
 package cordova.plugin.calculator;
 
-import cordova.plugin.calculator.R;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -437,10 +437,10 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
     }
 
     private void addBarcodeReaderFragment() {
-        final CordovaPlugin that = this;
+        
         BarcodeReaderFragment readerFragment = BarcodeReaderFragment.newInstance(true, false, View.VISIBLE);
         readerFragment.setListener(this);
-        FragmentManager supportFragmentManager = cordova.getActivity().getSupportFragmentManager();
+        FragmentManager supportFragmentManager = this.cordova.getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fm_container, readerFragment);
         fragmentTransaction.commitAllowingStateLoss();
