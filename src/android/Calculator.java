@@ -14,9 +14,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -274,8 +271,8 @@ public class Calculator extends CordovaPlugin
                 {
 
 
-                    Intent intent = new Intent(this.cordova.getActivity(), MainActivity.class);
-                    this.cordova.getActivity().startActivity(intent);
+                    Intent intent = new Intent(that.cordova.getActivity().getBaseContext(), MainActivity.class);
+                    this.cordova.startActivity(intent);
 
                     // // Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
                     // intentScan.setAction(Intents.Scan.ACTION);

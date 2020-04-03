@@ -1,4 +1,4 @@
-package com.notbytes.barcodereader;
+package cordova.plugin.calculator;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,12 +20,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements BarcodeReaderFragment.BarcodeReaderListener {
     private static final int BARCODE_READER_ACTIVITY_REQUEST = 1208;
 
+    String package_name = ""; 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_main);
 
-        String package_name = getActivity().getPackageName();
+        package_name = getActivity().getPackageName();
         setContentView(getResources().getIdentifier("activity_main", "layout", package_name));
 
         addBarcodeReaderFragment();
