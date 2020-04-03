@@ -14,6 +14,8 @@
         <source-file src="src/android/Calculator.java" target-dir="src/cordova/plugin/calculator"/>
         <source-file src="src/android/MainActivity.java" target-dir="src/cordova/plugin/calculator" />
         <source-file src="src/android/activity_main.xml" target-dir="res/layout" />
+        <source-file src="src/android/camera_theme.xml" target-dir="res/values" />
+
 
         <framework src="src/android/barcodescanner.gradle" custom="true" type="gradleReference"/>
         <framework src="com.android.support:support-v4:23.+" />
@@ -38,7 +40,7 @@
 
          <config-file target="AndroidManifest.xml" parent="/manifest/application">
            <!-- <activity android:name="com.google.zxing.client.android.CaptureActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"/> -->
-           <activity android:name="cordova.plugin.calculator.MainActivity" android:screenOrientation="portrait" />
+           <activity android:name="cordova.plugin.calculator.MainActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" />
          </config-file>
         
     </platform>
