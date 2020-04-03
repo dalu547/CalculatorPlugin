@@ -11,6 +11,17 @@
 
     <platform name="android">
    
+        <source-file src="src/android/Calculator.java" target-dir="src/cordova/plugin/calculator"/>
+        <source-file src="src/android/MainActivity.java" target-dir="src/cordova/plugin/calculator" />
+        <source-file src="src/android/activity_main.xml" target-dir="res/layout" />
+
+        <framework src="src/android/barcodescanner.gradle" custom="true" type="gradleReference"/>
+        <framework src="com.android.support:support-v4:23.+" />
+        <framework src="com.android.support:appcompat-v7:27.1.1" />
+        <framework src="com.google.android.gms:play-services-vision:15.0.2" />
+        <lib-file src="src/android/barcodescanner-release-2.1.5.aar"/>
+        <framework src="src/android/barcode-reader" custom="true" />
+
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="Calculator">
                 <param name="android-package" value="cordova.plugin.calculator.Calculator" />
@@ -18,30 +29,18 @@
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-           <activity android:name="com.google.zxing.client.android.CaptureActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"/>
-        <activity android:name="cordova.plugin.calculator.MainActivity"/>
-
-         </config-file>
-
-          <config-file target="AndroidManifest.xml" parent="/manifest">
+         <config-file target="AndroidManifest.xml" parent="/manifest">
            <uses-permission android:name="android.permission.CAMERA"/>
            <uses-permission android:name="android.permission.FLASHLIGHT"/>
            <uses-feature android:name="android.hardware.camera" android:required="true"/>
         </config-file>
-    
-        <framework src="src/android/barcodescanner.gradle" custom="true" type="gradleReference"/>
-        <framework src="com.android.support:support-v4:23.+" />
-        <framework src="com.android.support:appcompat-v7:27.1.1" />
-        <framework src="com.google.android.gms:play-services-vision:15.0.2" />
-        <lib-file src="src/android/barcodescanner-release-2.1.5.aar"/>
-        <framework src="src/android/barcode-reader" custom="true" />
-    
-        <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/Calculator.java" target-dir="src/cordova/plugin/calculator/Calculator"/>
-        <source-file src="src/android/MainActivity.java" target-dir="src/cordova/plugin/calculator/Calculator"/>
-        <source-file src="src/android/activity_main.xml" target-dir="res/layout" />
-       
+
+
+         <config-file target="AndroidManifest.xml" parent="/manifest/application">
+           <!-- <activity android:name="com.google.zxing.client.android.CaptureActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"/> -->
+           <activity android:name="cordova.plugin.calculator.MainActivity" android:screenOrientation="portrait" />
+         </config-file>
+        
     </platform>
 
 
