@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -24,7 +23,7 @@ import android.widget.Toast;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.notbytes.barcode_reader.BarcodeReaderActivity;
 import com.notbytes.barcode_reader.BarcodeReaderFragment;
-
+import java.util.List;
 
 
 import org.apache.cordova.PluginResult;
@@ -438,9 +437,10 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
     }
 
     private void addBarcodeReaderFragment() {
+        final CordovaPlugin that = this;
         BarcodeReaderFragment readerFragment = BarcodeReaderFragment.newInstance(true, false, View.VISIBLE);
         readerFragment.setListener(this);
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentManager supportFragmentManager = that.cordova.getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fm_container, readerFragment);
         fragmentTransaction.commitAllowingStateLoss();
@@ -449,8 +449,8 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
     @Override
     public void onScanned(Barcode barcode) {
 //        Toast.makeText(this, barcode.rawValue, Toast.LENGTH_SHORT).show();
-        mTvResultHeader.setText("Barcode values");
-        mTvResult.setText(barcode.rawValue);
+        // mTvResultHeader.setText("Barcode values");
+        // mTvResult.setText(barcode.rawValue);
     }
 
     @Override
@@ -464,11 +464,10 @@ public class Calculator extends CordovaPlugin implements BarcodeReaderFragment.B
         }
 
         final String finalCodes = codes;
-//        Toast.makeText(MainActivity.this, "Barcodes: " + finalCodes, Toast.LENGTH_SHORT).show();
 
-//        Toast.makeText(this, finalCodes, Toast.LENGTH_SHORT).show();
-        mTvResultHeader.setText("Barcode value from fragment");
-        mTvResult.setText(finalCodes);
+       Toast.makeText(this, finalCodes, Toast.LENGTH_SHORT).show();
+        // mTvResultHeader.setText("Barcode value from fragment");
+        // mTvResult.setText(finalCodes);
 
     }
 
