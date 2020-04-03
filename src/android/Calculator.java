@@ -1,6 +1,6 @@
 package cordova.plugin.calculator;
 
-
+import cordova.plugin.calculator.R;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
