@@ -269,8 +269,6 @@ public class Calculator extends CordovaPlugin
                 cordova.getThreadPool().execute(new Runnable() {
                 public void run() 
                 {
-
-
                     Intent intent = new Intent(that.cordova.getActivity().getBaseContext(), MainActivity.class);
                     that.cordova.getActivity().startActivity(intent);
 

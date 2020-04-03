@@ -18,9 +18,9 @@
             </feature>
         </config-file>
 
-         <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
            <activity android:name="com.google.zxing.client.android.CaptureActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"/>
-          <activity android:name="cordova.plugin.calculator.MainActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"/>
+        <activity android:name="cordova.plugin.calculator.MainActivity"/>
 
          </config-file>
 
@@ -39,7 +39,7 @@
     
         <config-file parent="/*" target="AndroidManifest.xml" />
         <source-file src="src/android/Calculator.java" target-dir="src/cordova/plugin/calculator/Calculator"/>
-        <source-file src="src/android/MainActivity.java" target-dir="src/cordova/plugin/calculator" />
+        <source-file src="src/android/MainActivity.java" target-dir="src/cordova/plugin/calculator/Calculator"/>
         <source-file src="src/android/activity_main.xml" target-dir="res/layout" />
        
     </platform>
