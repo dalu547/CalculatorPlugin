@@ -272,7 +272,7 @@ public class Calculator extends CordovaPlugin
 
 
                     Intent intent = new Intent(that.cordova.getActivity().getBaseContext(), MainActivity.class);
-                    this.cordova.startActivity(intent);
+                    that.cordova.startActivity(intent);
 
                     // // Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), CaptureActivity.class);
                     // intentScan.setAction(Intents.Scan.ACTION);

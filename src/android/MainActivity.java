@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements BarcodeReaderFrag
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_main);
 
-        package_name = getActivity().getPackageName();
-        setContentView(getResources().getIdentifier("activity_main", "layout", package_name));
+        package_name = getApplication().getPackageName();
+        setContentView(getApplication().getResources().getIdentifier("activity_main", "layout", package_name));
 
         addBarcodeReaderFragment();
     }
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeReaderFrag
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         // fragmentTransaction.replace(R.id.fm_container, readerFragment);
-        fragmentTransaction.replace(getResources().getIdentifier("fm_container", "id", package_name), readerFragment);
+        fragmentTransaction.replace(getApplication().getResources().getIdentifier("fm_container", "id", package_name), readerFragment);
         fragmentTransaction.commitAllowingStateLoss();
     }
 
