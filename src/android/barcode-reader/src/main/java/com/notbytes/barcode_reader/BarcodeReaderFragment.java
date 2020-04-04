@@ -30,6 +30,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -74,6 +75,8 @@ public class BarcodeReaderFragment extends Fragment implements View.OnTouchListe
     private boolean sentToSettings = false;
     private ScannerOverlay mScanOverlay;
     private int scanOverlayVisibility;
+
+    private Button btnConsume,btnDelay,btnSkip;
 
     public BarcodeReaderFragment() {
         // Required empty public constructor
@@ -146,6 +149,32 @@ public class BarcodeReaderFragment extends Fragment implements View.OnTouchListe
         gestureDetector = new GestureDetector(getActivity(), new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(getActivity(), new ScaleListener());
         view.setOnTouchListener(this);
+
+        btnConsume = view.findViewById(R.id.btnConsume);
+        btnDelay = view.findViewById(R.id.btnDelay);
+        btnSkip = view.findViewById(R.id.btnSkip);
+
+        btnConsume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"Consume clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnDelay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"Delay clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"Skip clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 

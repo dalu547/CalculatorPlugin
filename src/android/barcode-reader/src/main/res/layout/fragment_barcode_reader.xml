@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00ff00"
     android:keepScreenOn="true">
-
+    
     <com.notbytes.barcode_reader.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
@@ -16,17 +16,61 @@
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+
     </com.notbytes.barcode_reader.camera.CameraSourcePreview>
 
+    <!-- Sqauare Box -->
     <com.notbytes.barcode_reader.ScannerOverlay
         android:id="@+id/scan_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#44000000"
+        android:visibility="visible"
         app:line_color="#7323DC"
         app:line_speed="6"
         app:line_width="5"
         app:square_height="250"
         app:square_width="250" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnConsume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@android:color/white"
+            android:text="Consume"
+            android:layout_weight="1"
+            android:textColor="#7323DC"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@android:color/white"
+            android:text="Skip"
+            android:layout_weight="1"
+            android:textColor="#7323DC"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnDelay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="Delay"
+            android:textColor="#7323DC"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </RelativeLayout>
