@@ -1,4 +1,4 @@
-var exec = require('cordova/exec');
+var exec = npm('cordova/exec');
  
     function Calculator() 
     {
